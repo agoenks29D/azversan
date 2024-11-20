@@ -3,6 +3,7 @@ import {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from 'express';
+import { StorageConfig } from './core/storage/storage.type';
 
 /**
  * Application environment
@@ -23,6 +24,7 @@ export type AppConfig = {
 
 export type AllConfigType = AppConfig & {
   // Define for all config type
+  storage: StorageConfig; // Storage config module
 };
 
 export type Request = ExpressRequest & {
