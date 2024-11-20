@@ -1,4 +1,5 @@
 import { ValidationError } from '@nestjs/common';
+import { SequelizeModuleOptions } from '@nestjs/sequelize';
 import {
   Request as ExpressRequest,
   Response as ExpressResponse,
@@ -23,6 +24,7 @@ export type AppConfig = {
 
 export type AllConfigType = AppConfig & {
   // Define for all config type
+  database: SequelizeModuleOptions; // Database config module
 };
 
 export type Request = ExpressRequest & {

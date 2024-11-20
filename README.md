@@ -14,8 +14,47 @@ This boilerplate is a perfect starting point for building modern, efficient, and
 
 ## Project setup
 
+Copy the example environment configuration file to .env:
+
+```bash
+$ cp .env.example .env
+```
+
+Install all required Node.js packages:
+
 ```bash
 $ npm install
+```
+
+### Environment
+
+```bash
+# Database
+DB_LOG = false
+DB_SYNC = true
+DB_MODE = alter
+DB_TIME = +00:00
+```
+
+### Environment Configuration Overview
+
+| **Name**  | **Description**                                                                                                                                                                                                                                |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DB_LOG`  | Enables or disables database logging.                                                                                                                                                                                                          |
+| `DB_SYNC` | Enables or disables database synchronization. When set to `true`, the application will synchronize its state with the database.                                                                                                                |
+| `DB_MODE` | Specifies the mode of database operation. The options are: <br> - `alter`: Modifies the database schema without dropping existing data. <br> - `force`: Forces the database to drop existing tables and recreate them, resulting in data loss. |
+| `DB_TIME` | Specifies the time zone for the database. The value `+00:00` represents UTC (Coordinated Universal Time), ensuring that time-related data is stored in a consistent, universal time format across different environments.                      |
+
+Run migration:
+
+```bash
+npx sequelize-cli db:migrate --name test
+```
+
+Run seeder:
+
+```bash
+npx sequelize-cli db:seed --seed test
 ```
 
 ## Compile and run the project
