@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { WinstonModule } from 'nest-winston';
+import { SecurityModule } from './security/security.module';
 import { AllExceptionFilter, HttpExceptionFilter } from './framework/filters';
 import appConfig, { winstonConfigFactory } from '@/app.config';
 
@@ -23,6 +24,7 @@ import appConfig, { winstonConfigFactory } from '@/app.config';
       timeouts: true,
     }),
     EventEmitterModule.forRoot({ global: true }),
+    SecurityModule,
   ],
   providers: [
     Logger,
@@ -35,5 +37,6 @@ import appConfig, { winstonConfigFactory } from '@/app.config';
       useClass: HttpExceptionFilter,
     },
   ],
+  exports: [SecurityModule],
 })
 export class CoreModule {}
