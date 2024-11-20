@@ -8,7 +8,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The **Nest.js Boilerplate** is a foundational template designed to accelerate the development of scalable and efficient server-side applications. It incorporates commonly used packages, best practices, and modular architecture, making it easy to extend and adapt for various use cases.
+
+This boilerplate is a perfect starting point for building modern, efficient, and maintainable applications with Nest.js.
 
 ## Project setup
 

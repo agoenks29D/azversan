@@ -1,10 +1,48 @@
-import { Module } from '@nestjs/common';
+import {
+  Logger,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { CoreModule } from './core/core.module';
 import { AppController } from './app.controller';
+import { AppMiddleware } from './app.middleware';
 import { AppService } from './app.service';
+import { AppConfig } from './app.type';
 
 @Module({
-  imports: [],
+  imports: [CoreModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [Logger, AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule, OnApplicationBootstrap {
+  constructor(
+    private logger: Logger,
+    private configService: ConfigService,
+  ) {}
+
+  /**
+   * Apply middleware
+   */
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AppMiddleware).forRoutes('*');
+  }
+
+  onApplicationBootstrap() {
+    const environment = this.configService.get<AppConfig>('environment');
+    /**
+     * Logging
+     */
+    this.logger.log(`Environment: ${environment}`, AppModule.name);
+    this.logger.log(
+      `HTTPS enabled: ${this.configService.get('ENABLE_HTTPS')}`,
+      AppModule.name,
+    );
+    this.logger.log(
+      `System timezone: ${this.configService.get('TZ')}`,
+      AppModule.name,
+    );
+  }
+}

@@ -1,3 +1,7 @@
+# developer workspace
+notes/
+*.bak.*
+
 # compiled output
 /dist
 /node_modules
