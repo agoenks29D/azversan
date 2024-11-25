@@ -34,6 +34,19 @@ DB_LOG = false
 DB_SYNC = true
 DB_MODE = alter
 DB_TIME = +00:00
+
+# Security: API Key
+API_KEY_AUTH = true
+API_KEY_AUTH_KEY_NAME = X-API-KEY
+
+# Security: Blacklist
+BLACKLIST_ENABLE = true
+DEVICE_ID_KEY_NAME = X-DEVICE-ID
+
+# Security: JWT
+JWT_AUTH = true
+JWT_SECRET = NestjsBoilerplate
+JWT_EXPIRATION = 4h
 ```
 
 ### Environment Configuration Overview
@@ -44,18 +57,13 @@ DB_TIME = +00:00
 | `DB_SYNC` | Enables or disables database synchronization. When set to `true`, the application will synchronize its state with the database.                                                                                                                |
 | `DB_MODE` | Specifies the mode of database operation. The options are: <br> - `alter`: Modifies the database schema without dropping existing data. <br> - `force`: Forces the database to drop existing tables and recreate them, resulting in data loss. |
 | `DB_TIME` | Specifies the time zone for the database. The value `+00:00` represents UTC (Coordinated Universal Time), ensuring that time-related data is stored in a consistent, universal time format across different environments.                      |
-
-Run migration:
-
-```bash
-npx sequelize-cli db:migrate --name test
-```
-
-Run seeder:
-
-```bash
-npx sequelize-cli db:seed --seed test
-```
+| `API_KEY_AUTH`          | Enables or disables API key authentication. When set to `true`, requests must include a valid API key.                                        |
+| `API_KEY_AUTH_KEY_NAME` | Specifies the header name that will carry the API key for authentication. The default is `X-API-KEY`, which should be used in requests.       |
+| `BLACKLIST_ENABLE`      | Activates the blacklist feature. When set to `true`, clients can be blacklisted based on specific criteria.                                   |
+| `DEVICE_ID_KEY_NAME`    | Defines the header name used to transmit the Device ID when implementing the blacklist feature. The default is `X-DEVICE-ID`.                 |
+| `JWT_AUTH`              | Enables or disables JSON Web Token (JWT) authentication. When `true`, the application will require JWT for secure access.                     |
+| `JWT_SECRET`            | Specifies the secret key used to sign and verify JWT tokens, ensuring their integrity and authenticity. This key should be kept confidential. |
+| `JWT_EXPIRATION`        | Sets the duration for which JWT tokens remain valid. The format is in duration format, such as `4h` for four hours.                           |
 
 ## Compile and run the project
 
