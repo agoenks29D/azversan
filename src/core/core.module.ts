@@ -6,6 +6,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { WinstonModule } from 'nest-winston';
 import { DatabaseModule } from './database/database.module';
 import { SecurityModule } from './security/security.module';
+import { StorageModule } from './storage/storage.module';
 import { AllExceptionFilter, HttpExceptionFilter } from './framework/filters';
 import appConfig, { winstonConfigFactory } from '@/app.config';
 
@@ -27,6 +28,7 @@ import appConfig, { winstonConfigFactory } from '@/app.config';
     EventEmitterModule.forRoot({ global: true }),
     DatabaseModule,
     SecurityModule,
+    StorageModule,
   ],
   providers: [
     Logger,
@@ -39,6 +41,6 @@ import appConfig, { winstonConfigFactory } from '@/app.config';
       useClass: HttpExceptionFilter,
     },
   ],
-  exports: [SecurityModule],
+  exports: [SecurityModule, StorageModule],
 })
 export class CoreModule {}

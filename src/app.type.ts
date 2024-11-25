@@ -5,6 +5,7 @@ import {
   Response as ExpressResponse,
 } from 'express';
 import { SecurityConfig } from './core/security/security.type';
+import { StorageConfig } from './core/storage/storage.type';
 
 /**
  * Application environment
@@ -27,6 +28,7 @@ export type AllConfigType = AppConfig & {
   // Define for all config type
   database: SequelizeModuleOptions; // Database config module
   security: SecurityConfig; // Security config module
+  storage: StorageConfig; // Storage config module
 };
 
 export type Request = ExpressRequest & {

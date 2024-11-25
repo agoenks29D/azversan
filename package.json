@@ -29,6 +29,9 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.696.0",
+    "@aws-sdk/s3-request-presigner": "^3.696.0",
+    "@google-cloud/storage": "^7.14.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.0.0",
@@ -42,6 +45,7 @@
     "class-validator": "^0.14.1",
     "lodash": "^4.17.21",
     "mysql2": "^3.11.4",
+    "mime-types": "^2.1.35",
     "nest-winston": "^1.9.7",
     "pretty-bytes": "^6.1.1",
     "reflect-metadata": "^0.2.0",
@@ -63,6 +67,7 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.2",
     "@types/lodash": "^4.17.13",
+    "@types/mime-types": "^2.1.4",
     "@types/multer": "^1.4.12",
     "@types/node": "^20.3.1",
     "@types/sequelize": "^4.28.20",
