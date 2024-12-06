@@ -19,7 +19,7 @@ export const Trashed = createParamDecorator(
     const errorResponse: ErrorFormat = {
       code: 400,
       error: 'ValidationError',
-      message: 'Invalid Request',
+      message: 'Invalid request',
       errorItems: [],
     };
     const request = ctx.switchToHttp().getRequest<Request>();

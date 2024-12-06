@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      'test',
+      'blacklist',
       {
         id: {
           allowNull: false,
@@ -10,11 +10,15 @@ module.exports = {
           autoIncrement: true,
           type: Sequelize.INTEGER,
         },
-        name: {
+        type: {
+          type: Sequelize.ENUM('DeviceID', 'IP'),
+          allowNull: false,
+        },
+        value: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        value: Sequelize.STRING,
+        description: Sequelize.STRING,
         created_at: {
           allowNull: false,
           type: Sequelize.DATE,
@@ -31,6 +35,6 @@ module.exports = {
     );
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('test');
+    await queryInterface.dropTable('blacklist');
   },
 };

@@ -87,6 +87,26 @@ GCLOUD_BUCKET =
 | `GCLOUD_KEY_FILE`       | Points to the JSON key file used for authenticating with Google Cloud services. Critical for accessing Google Cloud Storage.                                                                                                                   |
 | `GCLOUD_BUCKET`         | Defines the name of the Google Cloud Storage bucket to use for storing files.                                                                                                                                                                  |
 
+## Database Migration & Seeding
+
+Run migrations :
+
+```bash
+$ npx sequelize-cli db:migrate --name 1.0.0-base.js
+```
+
+Run the demo seeder.
+
+```bash
+$ npx sequelize-cli db:seed --seed demo
+```
+
+Run the production seeder.
+
+```bash
+$ npx sequelize-cli db:seed --seed start
+```
+
 ## Compile and run the project
 
 ```bash

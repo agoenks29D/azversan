@@ -11,9 +11,11 @@ import { AppController } from './app.controller';
 import { AppMiddleware } from './app.middleware';
 import { AppService } from './app.service';
 import { AppConfig } from './app.type';
+import { AuthModule } from './app/auth/auth.module';
+import { UserModule } from './app/user/user.module';
 
 @Module({
-  imports: [CoreModule],
+  imports: [CoreModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [Logger, AppService],
 })

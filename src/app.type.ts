@@ -6,6 +6,8 @@ import {
 } from 'express';
 import { SecurityConfig } from './core/security/security.type';
 import { StorageConfig } from './core/storage/storage.type';
+import { UserEntity } from './app/user/user.entity';
+import { UserConfig } from './app/user/user.type';
 
 /**
  * Application environment
@@ -29,6 +31,7 @@ export type AllConfigType = AppConfig & {
   database: SequelizeModuleOptions; // Database config module
   security: SecurityConfig; // Security config module
   storage: StorageConfig; // Storage config module
+  user: UserConfig; // User config module
 };
 
 export type Request = ExpressRequest & {
@@ -36,6 +39,11 @@ export type Request = ExpressRequest & {
    * Unique identifier each request
    */
   uid: string;
+
+  /**
+   * Authenticated user
+   */
+  user?: UserEntity;
 };
 
 export type Response = ExpressResponse;

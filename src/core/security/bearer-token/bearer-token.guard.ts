@@ -9,7 +9,11 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
+import { InjectModel } from '@nestjs/sequelize';
+import { AuthTokenModel } from '@/app/auth/models';
+import { UserModel } from '@/app/user/models';
+import { UserEntity } from '@/app/user/user.entity';
+import { JWTContentUserToken } from '@/app/user/user.type';
 import { AllConfigType, ErrorFormat, Request } from '@/app.type';
 import { DisableBearerToken } from './bearer-token.decorator';
 import { SecurityConfig } from '../security.type';
@@ -21,11 +25,11 @@ export class BearerTokenGuard implements CanActivate {
     private reflector: Reflector,
     private configService: ConfigService<AllConfigType>,
     private jwtService: JwtService,
+    @InjectModel(AuthTokenModel) private authTokenModel: typeof AuthTokenModel,
+    @InjectModel(UserModel) private userModel: typeof UserModel,
   ) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     /**
      * Retrieve class and method from the execution context
      */
@@ -132,14 +136,56 @@ export class BearerTokenGuard implements CanActivate {
           throw new UnauthorizedException(errorResponse);
         }
 
+        const authToken = await this.authTokenModel.findOne({
+          where: { token },
+        });
+
+        if (!authToken) {
+          /**
+           * Logging
+           */
+          this.logger.debug('Invalid token', BearerTokenGuard.name);
+
+          errorResponse.error = 'InvalidToken';
+          errorResponse.message = 'Invalid token';
+          throw new UnauthorizedException(errorResponse);
+        }
+
+        if (authToken.isRevoked) {
+          /**
+           * Logging
+           */
+          this.logger.debug('Token revoked', BearerTokenGuard.name);
+
+          errorResponse.error = 'TokenRevoked';
+          errorResponse.message = 'Token revoked';
+          throw new UnauthorizedException(errorResponse);
+        }
+
         try {
-          const { userId } = this.jwtService.verify(token);
+          const { type, userId } =
+            this.jwtService.verify<JWTContentUserToken>(token);
+          const user = await this.userModel.findByPk(userId);
+
+          if (type !== 'access') {
+            errorResponse.error = 'InvalidTokenType';
+            errorResponse.message = 'Invalid token type';
+            throw new UnauthorizedException(errorResponse);
+          }
+
+          if (!user) {
+            errorResponse.error = 'AccountDeleted';
+            errorResponse.message = 'Your account has been deleted';
+            throw new UnauthorizedException(errorResponse);
+          }
+
+          httpReq.user = new UserEntity(user.dataValues);
 
           /**
            * Logging
            */
           this.logger.debug(
-            `Authenticated as user : ${userId}`,
+            `Authenticated as user : [${userId}] ${user.fullName}`,
             BearerTokenGuard.name,
           );
 

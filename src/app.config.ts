@@ -83,7 +83,7 @@ export const VALIDATION_PIPE_OPTIONS: ValidationPipeOptions = {
     const errorFormat: ErrorFormat = {
       code: 400,
       error: 'ValidationError',
-      message: 'Invalid Request',
+      message: 'Invalid request',
       errorItems: errors,
     };
 

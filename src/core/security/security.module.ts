@@ -4,6 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { JwtModule } from '@nestjs/jwt';
 import { AllConfigType } from '@/app.type';
+import { AuthTokenModel } from '@/app/auth/models';
+import { UserModel } from '@/app/user/models';
 import { APIKeyModel } from './api-key/api-key.model';
 import { APIKeyGuard } from './api-key/api-key.guard';
 import { APIKeyService } from './api-key/api-key.service';
@@ -34,6 +36,7 @@ import securityConfig from './security.config';
       },
     }),
     SequelizeModule.forFeature([APIKeyModel, BlacklistModel]),
+    SequelizeModule.forFeature([AuthTokenModel, UserModel]),
   ],
   providers: [
     Logger,

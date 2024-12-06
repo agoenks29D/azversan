@@ -19,7 +19,7 @@ export const LimitQuery = createParamDecorator(
     const errorResponse: ErrorFormat = {
       code: 400,
       error: 'ValidationError',
-      message: 'Invalid Request',
+      message: 'Invalid request',
       errorItems: [],
     };
     const req = ctx.switchToHttp().getRequest<Request>();
@@ -53,7 +53,7 @@ export const OffsetQuery = createParamDecorator(
     const errorResponse: ErrorFormat = {
       code: 400,
       error: 'ValidationError',
-      message: 'Invalid Request',
+      message: 'Invalid request',
       errorItems: [],
     };
     const req = ctx.switchToHttp().getRequest<Request>();
