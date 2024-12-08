@@ -52,7 +52,7 @@ JWT_EXPIRATION = 4h
 DISK_STORAGE_ROOT =
 
 # Storage: AWS S3
-S3_ENPOINT =
+S3_ENDPOINT =
 S3_REGION =
 S3_ACCESS_KEY =
 S3_SECRET_KEY =
@@ -79,7 +79,7 @@ GCLOUD_BUCKET =
 | `JWT_SECRET`            | Specifies the secret key used to sign and verify JWT tokens, ensuring their integrity and authenticity. This key should be kept confidential.                                                                                                  |
 | `JWT_EXPIRATION`        | Sets the duration for which JWT tokens remain valid. The format is in duration format, such as `4h` for four hours.                                                                                                                            |
 | `DISK_STORAGE_ROOT`     | Specifies the root directory for local disk storage. This needs to be set to define where files will be stored.                                                                                                                                |
-| `S3_ENPOINT`            | The endpoint for your S3 storage service. Must be configured to enable interaction with the S3 bucket.                                                                                                                                         |
+| `S3_ENDPOINT`           | The endpoint for your S3 storage service. Must be configured to enable interaction with the S3 bucket.                                                                                                                                         |
 | `S3_REGION`             | Indicates the AWS region where the S3 bucket is located. Necessary for proper connectivity and access.                                                                                                                                         |
 | `S3_ACCESS_KEY`         | The access key required for authenticating requests to your S3 storage. Ensure it is kept secure.                                                                                                                                              |
 | `S3_SECRET_KEY`         | The secret key used alongside the access key to authenticate and authorize access to your S3 bucket. Keep it confidential.                                                                                                                     |

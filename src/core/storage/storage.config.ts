@@ -9,7 +9,7 @@ export default registerAs<StorageConfig>('storage', () => {
     },
     objectStorage: {
       s3: {
-        endpoint: process.env.S3_ENPOINT,
+        endpoint: process.env.S3_ENDPOINT,
         region: process.env.S3_REGION,
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY,
